@@ -1,0 +1,16 @@
+name: Check Billing (test)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sam-harri/neon_billing_alerts@master
+        with:
+          neon_api_key: ${{ secrets.NEON_API_KEY }}
+          neon_project_id: ${{ secrets.NEON_PROJECT_ID }}
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          alert_mode: always
